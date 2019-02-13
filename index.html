@@ -596,7 +596,7 @@
 
         function databind() {
             $(".addtable").html("")
-            $(".tabelhead").html("")
+            $(".tabelhead").children().html("")
             var queryParam = getQueryParam();
             var htmlStrTotal = "";
             var str = "";
@@ -616,9 +616,11 @@
                 paramMe.Units = row.Units;
                 var name = OutputName + '-' + PollutantName + Units;
 
+
                 // 获取表格内容的数据
-                var strs = new Array();
-                var htmls = new Array();
+                htmlStrTotal = '<tr><td width="30%">' + name + '</td>';
+
+                str = '<td width="30%">测点名称</td>';
                 isvalue = 1;
                 $.ajax({
                     url: url2,
@@ -633,8 +635,7 @@
                         if (typeof data != 'object') {
                             data = JSON.parse(data);
                         }
-                        htmlStrTotal = '<tr><td width="30%">' + name + '</td>';
-                        str = '<td width="30%">测点名称</td>';
+
                         $.each(data, function (i, row) {
 
                             if (row.MonitorTime != null && row.MonitorTime != '') {
@@ -659,10 +660,7 @@
                             var biaozhun = row.UpStandard == null ? 0 : row.UpStandard;
                             var menxian = row.UpperValue == null ? 9999999 : row.UpperValue
                             str += '<td>' + time + '</td>';
-                            
-                            
 
-                            
                             var htmlStr = '';
                             if (value > biaozhun || value > menxian) {
                                 htmlStr += '<td style="color:blue">' + value + '</td>';
@@ -672,26 +670,18 @@
 
                             htmlStrTotal += htmlStr;
                         })
-                        var headlengh = $(".tabelhead").html() == null ? 0 : $(".tabelhead").html().length;
+
+                    },
+                    complete: function (XMLHttpRequest, textStatus) {
+                        var headlengh = $(".tabelhead").children().html() == null ? 0 : $(".tabelhead").children().html().length;
                         if (str.length > headlengh) {
-                            strs.push(str);
+                            $(".tabelhead").children().html(str);
                         }
 
 
                         if (isvalue == 0) {
-                            htmls.push(htmlStrTotal + '</tr>');
-                           
-                        }
-                    },
-                    complete: function (XMLHttpRequest, textStatus) {
-                        if (strs.length>0) {
-                            $(".tabelhead").html(strs[0]);
-                            strs.splice(0, 1);
-                        }
-                        if (htmls.length>0) {
-                            $(".addtable").append(htmls[0]);
+                            $(".addtable").append(htmlStrTotal + '</tr>');
                             findsameobj();
-                            htmls.splice(0, 1);
                         }
                     }
                 })
