@@ -1,0 +1,1594 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在线数据</title>
+
+
+    <!--<meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />-->
+    <!--<script src="http://srv.jointsky.com/JointEPCloud/app/js/rem.js"></script>-->
+    <link rel="stylesheet" href="http://srv.jointsky.com/JointEPCloud/app/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://srv.jointsky.com/JointEPCloud/app/css/base.css">
+    <link rel="stylesheet" href="http://srv.jointsky.com/JointEPCloud/app/css/index.css">
+    <link type="text/css" rel="stylesheet" href="http://srv.jointsky.com/JointEPCloud/app/jedate/skin/jedate.css">
+    <link rel="stylesheet" href="http://srv.jointsky.com/JointEPCloud/app/css/layer.css">
+    <!--<link rel="stylesheet" href="http://srv.jointsky.com/JointEPCloud/app/css/jquery.mobile-1.4.5.min.css">-->
+
+</head>
+
+<style>
+    table {
+        width: 100%;
+        border: 1px solid #999;
+    }
+
+        table td {
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+
+    body {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        left: 0;
+        top: 0;
+        background: #fff;
+        overflow: hidden;
+    }
+
+    .bigbox {
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        overflow: hidden;
+    }
+
+
+    #jedatebox {
+        transform: rotate(90deg);
+        position: fixed!important;
+        left: 50%!important;
+        top: 50%!important;
+        margin-left: -127px;
+        margin-top: -200px;
+    }
+
+    @media screen and (orientation: portrait) {
+        .cndown {
+            width: 2rem!important;
+        }
+        /*.cndown1{*/
+        /*width: 348px!important;*/
+        /*}*/
+        /*竖屏 css*/
+        #wrap {
+            /*width: 5.9rem;*/
+            width: 5.9rem;
+        }
+
+        /*.tabbox {
+            height: 3.8rem;
+        }*/
+
+
+
+        .biaoti .xun {
+            width: 11%;
+            /*background: red;*/
+        }
+        /*#wrap{*/
+        /*width: 6.6rem;*/
+        /*}*/
+        .cnxia {
+            left: 16%;
+        }
+
+        .line {
+            height: 250px;
+        }
+    }
+
+    @media screen and (orientation: landscape) {
+        /*横屏 css*/
+        .cndown {
+            width: 13rem!important;
+        }
+
+        /*.tabbox {
+            height: 3.8rem;
+        }*/
+
+
+        .cnxia {
+            /*width: 3rem;*/
+        }
+
+
+
+        .line {
+            height: 170px;
+        }
+
+
+        #wrap {
+            /*width: 5.9rem;*/
+            width: 3.3rem;
+        }
+
+
+        #jedatebox {
+            transform: rotate(0deg);
+            position: fixed!important;
+            left: 50%!important;
+            top: 50%!important;
+            margin-left: -135px;
+            margin-top: -128px;
+        }
+
+        .jedateblue .jedaul li {
+            height: 25px!important;
+        }
+
+            .jedateblue .jedaul li .nolunar {
+                line-height: 25px!important;
+            }
+
+        #bleft1 {
+            width: 45%!important;
+        }
+
+        #bleft {
+            width: 13%;
+        }
+
+        .biaoti .xun {
+            width: 18%;
+            /*background: blue;*/
+        }
+
+        .cnxia {
+            left: 15%;
+        }
+    }
+
+
+
+
+    .eew {
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        border-radius: 0.04rem;
+    }
+
+        .eew li {
+            width: 100%;
+            height: 30px;
+            text-align: center;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+    .wenzi {
+        display: block;
+        width: 200px;
+        height: 50px;
+        background: #fff;
+        border: 1px solid #ccc;
+        position: relative;
+    }
+
+    #wrap {
+        height: 150px;
+        /*display: none;*/
+        /*overflow:scroll;*/
+        box-sizing: border-box;
+    }
+
+    .cnxia {
+        position: absolute;
+        top: 46px;
+        height: 150px;
+        z-index: 99999999999999999999;
+    }
+
+    #bleft1 {
+        position: relative;
+        text-align: center;
+    }
+
+    .cnla tr, td {
+        height: 20px;
+        font-size: 14px;
+    }
+
+    .cnla {
+        background: #fff;
+    }
+
+
+
+
+    .cnup {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .type1, .type2, .type3, .type4, .type5, .type6, .type7, .type8 {
+        display: none;
+    }
+
+    @font-face {
+        font-family: 'iconfont';
+        src: url('css/iconfont.eot');
+        src: url('css/iconfont.eot?#iefix') format('embedded-opentype'), url('css/iconfont.woff') format('woff'), url('css/iconfont.ttf') format('truetype'), url('css/iconfont.svg#iconfont') format('svg');
+    }
+
+    .iconfont {
+        font-family: "iconfont" !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+    }
+</style>
+<body>
+    <!--<div class="zhezhaoX"></div>-->
+
+
+
+    <div class="bigbox" style="display: none">
+
+
+        <input id="openid" type="hidden" value="o2jQYwJv-oXIbAVxYPqtNqJD9HX8" />
+        <input id="psId" type="hidden" value="120110000287" />
+        <input id="showType" type="hidden" value="0" />
+
+        <div class="biaoti">
+            <!--<select name="" id="bleft"  style="height: 35px;outline: none;border-radius: 0.04rem;width: 100px;margin-left: 0.1rem">-->
+            <!--<option value="">小时数据</option>-->
+            <!--<option value="">日数据</option>-->
+            <!--</select>-->
+            <div class="dropdown" id="bleft">
+                <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="qwe ">
+                    小时数据
+                </button>
+                <!--<span class="caret" style="transform: rotate(360deg);position: absolute;left:90%;top: 48%;"></span>-->
+                <ul class="dropdown-menu cndown" aria-labelledby="dLabel" id="ulbox">
+                    <li data-options="2">实时数据</li>
+                    <li data-options="3">十分钟数据</li>
+                    <li data-options="0">小时数据</li>
+                    <li data-options="1">日数据</li>
+                </ul>
+            </div>
+
+
+            <!--<div class="dropdown"  id="bleft1">-->
+            <!--<button id="dLabel1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  class=" bleft"  dataOptions="{type}"></button>-->
+            <!--<ul class="dropdown-menu cndown1" aria-labelledby="dLabel"  id="">-->
+
+            <!--</ul>-->
+            <!--</div>-->
+
+            <input type="text" id="bleft1" dataoptions="{type}" readonly>
+            <div class="cnxia" style="overflow: scroll; display: none">
+                <table class="cnla" style="display: table" id="wrap">
+                    <tr>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <!--<div id="wrap">-->
+            <!--<span class="wenzi"></span>-->
+            <!--<ul  style=""  class="eew">-->
+            <!--<li>1</li>-->
+            <!--<li>2</li>-->
+            <!--<li>3</li>-->
+            <!--<li>1</li>-->
+            <!--<li>2</li>-->
+            <!--<li>3</li>-->
+            <!--<li>2</li>-->
+            <!--<li>3</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--<select name="" id="bleft1" style="appearance:none;box-sizing:border-box">-->
+            <!--<option value="">1号脱硫前-二氧化硫mg/m³</option>-->
+            <!--&lt;!&ndash;alll&ndash;&gt;-->
+            <!---->
+            <!--<option value="">氧含量</option>-->
+            <!--&lt;!&ndash;//只有检测值&ndash;&gt;-->
+            <!--<option value="">氨氮</option>-->
+            <!--&lt;!&ndash;//没有折算值&ndash;&gt;-->
+            <!--</select>-->
+            <div id="rili"></div>
+            <div id="rili1"></div>
+            <button class="xun" onclick="">查询</button>
+        </div>
+        <div style="width: 100%; position: absolute; bottom: 0px;" id="pageDiv">
+            <div class="iconfont" style="float: right; margin-right: 40px; font-size: 40px; color: #CCCCCC" id="downPage">&#xe623;</div>
+            <div style="width: 70%; text-align: center; display: inline-block"></div>
+            <div class="iconfont" style="float: right; margin-right: 20px; font-size: 40px; color: #CCCCCC" id="upPage">&#xe622;</div>
+        </div>
+        <div class="biaoshi" style="">
+
+            <!--<div class="biaobox  small" >-->
+            <!--<div class="xian"  style="background:#4c9cfb "></div>-->
+            <!--<span class="qi">监测数据</span>-->
+            <!--</div>-->
+
+            <div class="biaobox  big" style="">
+                <!-- <div class="type1" style="display: none; align-items: center">
+                    <div class="xian" style="background: #4c9cfb"></div>
+                    <span class="danwei"></span>
+                </div>
+
+                <div class="type2_1" style="display: none; align-items: center">
+                    <div class="xian" style="background: #4c9cfb"></div>
+                    <span class="danwei1"></span>
+                </div>
+                <div class="type2_2" style="display: none; align-items: center">
+                    <div class="xian" style="background: #4c9cfb"></div>
+                    <span class="danwei2"></span>
+                </div>
+
+                <div class="type2_3" style="display: none; align-items: center">
+                    <div class="xian" style="background: #4c9cfb"></div>
+                    <span class="danwei3"></span>
+                </div>
+
+                <div class="type2_4" style="display: none; align-items: center">
+                    <div class="xian" style="background: #4c9cfb"></div>
+                    <span class="danwei4"></span>
+                </div>
+
+                <div class="type2_5" style="display: none; align-items: center">
+                    <div class="xian" style="background: #4c9cfb"></div>
+                    <span class="danwei5"></span>
+                </div>
+
+                <div class="type2_6" style="display: none; align-items: center">
+                    <div class="xian" style="background: #4c9cfb"></div>
+                    <span class="danwei6"></span>
+                </div>
+
+                <div class="biao type3" style="display: none; align-items: center">
+                    <div class="xian" style="background: #FF7575"></div>
+                    <span id="upStandard">标准:</span>
+                </div>
+
+                <div class="cnup" style="">
+                    <span class="wuup"></span>
+                    <span class="xia"></span>
+                </div>
+
+                <div class="xian" style="background: #ff0000"></div>
+
+                <span id="upperValue" style="margin-left: 10px" class="type4">报警门限:</span>-->
+                <h4>连续3条以上一样的数据显示红色。小于标准值或大于报警门限值显示蓝色</h4>
+            </div>
+
+
+            <!--蓝色color: #338FDD-->
+            <!--图表-->
+            <div class="cntubox">
+                <div class="tubiao " style="display: none;">
+                    <div class="tu1box">
+                        <img src="images/图表-选中.png" alt="" class="cnimg">
+                    </div>
+                    <span class="biaofont cnfont" style="">图表</span>
+                </div>
+                <!--折线-->
+                <div class="tubiao  cnbiao bgb" style="margin-left: 5px;">
+                    <div class="tu1box">
+                        <img src="images/表格-未选中.png" alt="" class="cnimg">
+                    </div>
+                    <span class=" cnfont" style="">表格</span>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!--折线-->
+        <div class="line" id="main" style="display: none;">
+        </div>
+
+
+
+        <!--biaoge -->
+
+        <!--<table class="table table-hover  "  style="margin-bottom: 0px">-->
+        <!--<thead style="background: #2B8BDC;color: #fff">-->
+        <!--<td class="jianceTime" style="width: 260px">监测时间</td>-->
+        <!--<td class="biaozhun">标准值</td>-->
+        <!--<td class="menxian">报警门限</td>-->
+        <!--<td class="jiancezhi">监测值</td>-->
+        <!--<td class="zhesuanzhi">折算值</td>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+
+        <!--</tbody>-->
+        <!--</table>-->
+        <!--<div style="width: 100%;" class="tabbox">
+            <table class="table table-hover  " style="margin-bottom: 0px">
+                <thead style="background: #2B8BDC; color: #fff">
+                    <td class="jianceTime" style="width: 36%">监测时间</td>
+                    <td class="biaozhun" style="width: 16%">标准值</td>
+                    <td class="menxian" style="width: 16%">报警门限</td>
+                    <td class="jiancezhi" style="width: 16%">监测值</td>
+                    <td class="zhesuanzhi" style="width: 16%">折算值</td>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+
+            <div style="overflow: scroll;" class="tabbox">
+                <table class="table table-hover  addtable">
+                    <thead style="background: #2B8BDC; color: #fff">
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>-->
+        <div style="width: 100%; height: 100%; overflow: auto;" class="tabbox">
+
+
+
+            <div style="" class="tabbox">
+                <table class="table table-hover  ">
+                    <thead class="tabelhead" style="background: #2B8BDC; color: #fff;">
+                        <td>页面正在加载请耐心等待。。。。</td>
+                    </thead>
+                    <tbody class="addtable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        var domain = "srv.jointsky.com";
+    </script>
+    <script type="text/javascript" src="http://srv.jointsky.com/JointEPCloud/app/jedate/jquery.min.js"></script>
+    <script src="http://srv.jointsky.com/JointEPCloud/app/js/echarts.min.js"></script>
+    <script type="text/javascript" src="http://srv.jointsky.com/JointEPCloud/app/jedate/jquery.jedate.js"></script>
+    <script src="http://srv.jointsky.com/JointEPCloud/app/js/bootstrap.min.js"></script>
+    <script src="http://srv.jointsky.com/JointEPCloud/app/js/layer.js"></script>
+    <!--<script src="http://srv.jointsky.com/JointEPCloud/app/js/heng.js"></script>-->
+
+    <script type="text/javascript">
+        var param = {};
+        var preUrl = "http://" + domain + "/JointEPCloud/app/PsConfig!{method}.action?openid=" + $('#openid').val() + "&psId=" + $("#psId").val() + "&showType=" + $("#showType").val();;
+        //获取所需要页面的数据
+        var url1 = preUrl.replace('{method}', 'monitorPoint');
+        //获取表格中的数据
+        var url2 = preUrl.replace('{method}', 'monitorDataList');
+        //获取折线中的数据
+        var url3 = preUrl.replace('{method}', 'monitorData');
+        //在线数据
+        var onlineNew = window.location.host;
+        //首页地址
+        var index = window.location.host;
+        //ajax提交方式
+        var method = "get";
+        var param = {};
+        param.column = {
+            'jianceTime': true,//监测时间
+            'biaozhun': true,//标准值
+            'menxian': true,//报警门限
+            'jiancezhi': true,//检测值
+            'zhesuanzhi': true//折算值
+
+        };
+        param.currentPage = 1;//当前页面初始化：0：折线 1：图表
+        param.dataType = 0;//默认为折线类型
+        param.isDisplayLowerStandard = 0;//0:监测因子不为PH，1：监测因子为PH
+        param.pageNo = 1;
+        param.pageSize = 10;
+        param.monitorType = 1;//监测类型 0：小时数据 1：日数据 2：实时数据 3：十分钟数据
+        var list = new Array();
+
+        //-----------------------------------横屏显示-------------------------------------
+
+        //初始化事件！重置页面内容，需重新初始化事件
+        initEvent();
+        initAll();
+        //初始化时间
+        initDate();
+        //初始化监测因子
+        refreshMonitorPoint();
+
+        window.onresize = function () {
+            //调整画布的位置和大小
+            // initAll();
+            $('div').hide();
+            window.location.href = onlineNew + "&random=" + Math.random();
+        }
+
+        //初始化布局
+        function initAll() {
+            if (isupright()) {
+                changeSceneUpright($('.bigbox'));
+                changeSceneUpright($('.line'), 0);
+                changeSceneUpright($('.tabbox'), 0);
+            } else {
+                changeScene();
+            }
+            $('.bigbox').css({ 'display': '' })
+        }
+
+        $(".tubiao").each(function (i, demo) {
+            $(demo).on("click", function () {
+                $(".zhe").removeClass("zhe");
+                $(".tubiao").each(function (j, ele) {
+                    $(ele).removeClass("bgb");
+                })
+                $(".cnfont").each(function (i, ele) {
+                    $(ele).removeClass("biaofont");
+                })
+                $(".cnfont").eq(i).addClass("biaofont");
+                $(demo).addClass("bgb");
+
+                if (i == 0) {
+                    param.currentPage = 0;
+                    $(".cnimg").eq(0).attr('src', "images/图表-选中.png");
+                    $(".cnimg").eq(1).attr('src', "images/表格-未选中.png");
+                } else if (i == 1) {
+                    param.currentPage = 1;
+                    $(".cnimg").eq(1).attr('src', "images/表格-选中.png");
+                    $(".cnimg").eq(0).attr('src', "images/图表-未选中.png");
+                }
+                $('.xun').click();
+            });
+
+            $(".tubiao").each(function (i, demo) {
+                $(demo).on("click", function () {
+                    $(".tubiao").each(function (j, ele) {
+                        $(ele).removeClass("bgb");
+                    });
+                    $(".cnfont").each(function (i, ele) {
+                        $(ele).removeClass("biaofont");
+                    });
+                    $(".cnfont").eq(i).addClass("biaofont");
+                    $(demo).addClass("bgb");
+
+                });
+            });
+        });
+
+        var bleft1 = $("#bleft1 option:selected").text();
+        //烟气总排口输入框的内容
+        var stt;
+        //小时数据或者日数据
+        var stt1;
+
+        //数据默认表格模板
+        //全部显示
+        var templateTable = "";
+
+        var templateTr =
+            //'<tr>'
+            //+ '<td   class="jianceTime" style="width: 36%">{jianceTime}</td>'
+            //+ '<td class="biaozhun"  style="width: 16%">{biaozhun}</td>'
+            //+ '<td class="menxian"  style="width: 16%">{menxian}</td>'
+            //+ '<td class="jiancezhi cbian {fontred}"  style="width: 16%">{jiancezhi}</td>'
+            //+ '<td class="zhesuanzhi"  style="width: 16%">{zhesuanzhi}</td>'
+            //+ '</tr>'
+               '<tr>'
+             + '<td class="menxian"  style="width: 40%">{menxian}</td>'
+            + '<td   class="jianceTime" style="width: 30%">{jianceTime}</td>'
+            + '<td class="jiancezhi cbian"  style="width: 30%">{jiancezhi}</td>'
+
+            + '</tr>';
+
+
+        function databind() {
+            $(".addtable").html("")
+            $(".tabelhead").children().html("")
+            var queryParam = getQueryParam();
+            var htmlStrTotal = "";
+            var str = "";
+            var isvalue = 1
+            //初始化监测因子查询条件
+            $.each(list, function (i, row) {
+                var paramMe = getQueryParam();
+                var OutputName = row.OutputName_ ? row.OutputName_ : row.OutputName;
+                var PollutantName = row.PollutantName;
+                var Units = row.Units;
+
+                paramMe.PollutantCode = row.PollutantCode;
+                paramMe.PollutantName = row.PollutantName;
+                paramMe.OutputType = row.OutputType;
+                paramMe.OutputCode = row.OutputCode;
+                paramMe.StandardAndDate = row.StandardAndDate;
+                paramMe.Units = row.Units;
+                var name = OutputName + '-' + PollutantName + Units;
+
+
+                // 获取表格内容的数据
+                htmlStrTotal = '<tr><td width="30%">' + name + '</td>';
+
+                str = '<td width="30%">测点名称</td>';
+                isvalue = 1;
+                $.ajax({
+                    url: url2,
+                    type: method,
+                    //async: false,
+                    dataType: "json",
+                    data: paramMe,
+                    //timeout: 5000,
+                    success: function (data) {
+                        var a = paramMe;
+                        cancelMask();
+                        if (typeof data != 'object') {
+                            data = JSON.parse(data);
+                        }
+
+                        $.each(data, function (i, row) {
+
+                            if (row.MonitorTime != null && row.MonitorTime != '') {
+                                //格式化监测时间
+                                if (param.dataType == 0) {
+                                    //精确到分
+                                    row.MonitorTime = row.MonitorTime.substring(0, 16);
+                                } else if (param.dataType == 1) {
+                                    //精确到日
+                                    row.MonitorTime = row.MonitorTime.substring(0, 10);
+                                } else {
+                                    //精确到分
+                                    row.MonitorTime = row.MonitorTime.substring(0, 16);
+                                }
+                            }
+                            if (row.MonitValue != null) {
+                                isvalue = 0
+                            }
+
+                            var time = row.MonitorTime;
+                            var value = row.MonitValue == null ? '-' : row.MonitValue;
+                            var biaozhun = row.UpStandard == null ? 0 : row.UpStandard;
+                            var menxian = row.UpperValue == null ? 9999999 : row.UpperValue
+                            str += '<td>' + time + '</td>';
+
+                            var htmlStr = '';
+                            if (value > biaozhun || value > menxian) {
+                                htmlStr += '<td style="color:blue">' + value + '</td>';
+                            } else {
+                                htmlStr += '<td>' + value + '</td>';
+                            }
+
+                            htmlStrTotal += htmlStr;
+                        })
+
+                    },
+                    complete: function (XMLHttpRequest, textStatus) {
+                        var headlengh = $(".tabelhead").children().html() == null ? 0 : $(".tabelhead").children().html().length;
+                        if (str.length > headlengh) {
+                            $(".tabelhead").children().html(str);
+                        }
+
+
+                        if (isvalue == 0) {
+                            $(".addtable").append(htmlStrTotal + '</tr>');
+                            findsameobj();
+                        }
+                    }
+                })
+
+
+            })
+
+        }
+
+        function findsameobj() {
+            var b = 0;
+            var str = "";
+
+            $(".addtable").find("tr").last().children().each(function (s) {
+                if (str == $(this).text()) {
+                    b++;
+                } else {
+                    str = $(this).text();
+                    b = 0;
+                }
+                if (b > 2 && str != "0" && str != "-") {
+                    for (var i = 0; i <= b; i++) {
+                        $(this).parent().children().eq(s - i).css('color', 'red');
+                    }
+
+                }
+            })
+
+        }
+
+        //初始化时间
+        function initDate() {
+            $("#rili").css({ "display": "block" });
+            $("#rili1").css({ "display": "none" });
+            $.jeDate("#rili", {
+                isinitVal: true,
+                //festival:true,
+                ishmsVal: true,
+                fixedCell: "fixone",
+                maxDate: $.nowDate({ DD: 0 }),
+                format: "YYYY-MM-DD",
+                zIndex: 3000,
+                position: [100, 30],
+                okfun: function (elem, val, date) {
+                    param.monitorDate = val;
+                    $('.xun').click();
+                },
+                choosefun: function (elem, val) {
+                    param.monitorDate = val;
+
+                    $('.xun').click();
+                },
+
+            });
+            $.jeDate("#rili1", {
+                isinitVal: true,
+                //festival:true,
+                ishmsVal: false,
+                fixedCell: "fixone",
+                maxDate: $.nowDate({ MM: 0 }),
+                format: "YYYY-MM",
+                zIndex: 3000,
+                position: [100, 30],
+                okfun: function (elem, val, date) {
+                    param.monitorDate = val + '-01';
+
+                    $('.xun').click();
+                },
+                choosefun: function (elem, val) {
+                    param.monitorDate = val + '-01';
+
+                    $('.xun').click();
+                },
+
+            });
+        }
+
+
+        //初始化监测因子
+        function refreshMonitorPoint() {
+            var template1ist = ' <tr data-options="{type}"  onclick="menuList(\'{PollutantCode}\',\'{OutputType}\',\'{IsHasZS}\',\'{OutputCode}\',\'{PollutantName}\',\'{StandardAndDate}\',\'{Units}\')"><td>{listStr}</td>{listStr}</tr>';
+            var queryParam = getQueryParam();
+
+            //$.ajax({
+            //    url: url1,
+            //    type: method,
+            //    dataType: "json",
+            //    data: queryParam,
+            //    success: function (data) {
+            var data = "[{\"PSCode\":120110000287,\"OutputCode\":203,\"OutputName\":\"265平米烧结机\",\"OutputType\":2,\"PollutantCode\":\"002\",\"PollutantName\":\"二氧化硫\",\"StandardAndDate\":\"标准:2000\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":1},{\"PSCode\":120110000287,\"OutputCode\":203,\"OutputName\":\"265平米烧结机\",\"OutputType\":2,\"PollutantCode\":\"003\",\"PollutantName\":\"氮氧化物\",\"StandardAndDate\":\"标准:500\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":1},{\"PSCode\":120110000287,\"OutputCode\":203,\"OutputName\":\"265平米烧结机\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":1},{\"PSCode\":120110000287,\"OutputCode\":203,\"OutputName\":\"265平米烧结机\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":1},{\"PSCode\":120110000287,\"OutputCode\":203,\"OutputName\":\"265平米烧结机\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":1},{\"PSCode\":120110000287,\"OutputCode\":203,\"OutputName\":\"265平米烧结机\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":1},{\"PSCode\":120110000287,\"OutputCode\":203,\"OutputName\":\"265平米烧结机\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":1},{\"PSCode\":120110000287,\"OutputCode\":203,\"OutputName\":\"265平米烧结机\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":1},{\"PSCode\":120110000287,\"OutputCode\":203,\"OutputName\":\"265平米烧结机\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":1},{\"PSCode\":120110000287,\"OutputCode\":203,\"OutputName\":\"265平米烧结机\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":1},{\"PSCode\":120110000287,\"OutputCode\":203,\"OutputName\":\"265平米烧结机\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":1},{\"PSCode\":120110000287,\"OutputCode\":204,\"OutputName\":\"265平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"002\",\"PollutantName\":\"二氧化硫\",\"StandardAndDate\":\"标准:180\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":2},{\"PSCode\":120110000287,\"OutputCode\":204,\"OutputName\":\"265平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"003\",\"PollutantName\":\"氮氧化物\",\"StandardAndDate\":\"标准:300\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":2},{\"PSCode\":120110000287,\"OutputCode\":204,\"OutputName\":\"265平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"001\",\"PollutantName\":\"烟尘\",\"StandardAndDate\":\"标准:40\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":2},{\"PSCode\":120110000287,\"OutputCode\":204,\"OutputName\":\"265平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":2},{\"PSCode\":120110000287,\"OutputCode\":204,\"OutputName\":\"265平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":2},{\"PSCode\":120110000287,\"OutputCode\":204,\"OutputName\":\"265平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":2},{\"PSCode\":120110000287,\"OutputCode\":204,\"OutputName\":\"265平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":2},{\"PSCode\":120110000287,\"OutputCode\":204,\"OutputName\":\"265平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":2},{\"PSCode\":120110000287,\"OutputCode\":204,\"OutputName\":\"265平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":2},{\"PSCode\":120110000287,\"OutputCode\":204,\"OutputName\":\"265平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":2},{\"PSCode\":120110000287,\"OutputCode\":204,\"OutputName\":\"265平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":2},{\"PSCode\":120110000287,\"OutputCode\":204,\"OutputName\":\"265平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":2},{\"PSCode\":120110000287,\"OutputCode\":215,\"OutputName\":\"360平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"002\",\"PollutantName\":\"二氧化硫\",\"StandardAndDate\":\"标准:10000\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":3},{\"PSCode\":120110000287,\"OutputCode\":215,\"OutputName\":\"360平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"003\",\"PollutantName\":\"氮氧化物\",\"StandardAndDate\":\"标准:10000\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":3},{\"PSCode\":120110000287,\"OutputCode\":215,\"OutputName\":\"360平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"001\",\"PollutantName\":\"烟尘\",\"StandardAndDate\":\"标准:10000\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":3},{\"PSCode\":120110000287,\"OutputCode\":215,\"OutputName\":\"360平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":3},{\"PSCode\":120110000287,\"OutputCode\":215,\"OutputName\":\"360平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":3},{\"PSCode\":120110000287,\"OutputCode\":215,\"OutputName\":\"360平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":3},{\"PSCode\":120110000287,\"OutputCode\":215,\"OutputName\":\"360平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":3},{\"PSCode\":120110000287,\"OutputCode\":215,\"OutputName\":\"360平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":3},{\"PSCode\":120110000287,\"OutputCode\":215,\"OutputName\":\"360平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":3},{\"PSCode\":120110000287,\"OutputCode\":215,\"OutputName\":\"360平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":3},{\"PSCode\":120110000287,\"OutputCode\":215,\"OutputName\":\"360平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":3},{\"PSCode\":120110000287,\"OutputCode\":215,\"OutputName\":\"360平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":3},{\"PSCode\":120110000287,\"OutputCode\":216,\"OutputName\":\"360平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"002\",\"PollutantName\":\"二氧化硫\",\"StandardAndDate\":\"标准:180\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":4},{\"PSCode\":120110000287,\"OutputCode\":216,\"OutputName\":\"360平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"003\",\"PollutantName\":\"氮氧化物\",\"StandardAndDate\":\"标准:300\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":4},{\"PSCode\":120110000287,\"OutputCode\":216,\"OutputName\":\"360平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"001\",\"PollutantName\":\"烟尘\",\"StandardAndDate\":\"标准:40\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":4},{\"PSCode\":120110000287,\"OutputCode\":216,\"OutputName\":\"360平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":4},{\"PSCode\":120110000287,\"OutputCode\":216,\"OutputName\":\"360平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":4},{\"PSCode\":120110000287,\"OutputCode\":216,\"OutputName\":\"360平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":4},{\"PSCode\":120110000287,\"OutputCode\":216,\"OutputName\":\"360平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":4},{\"PSCode\":120110000287,\"OutputCode\":216,\"OutputName\":\"360平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":4},{\"PSCode\":120110000287,\"OutputCode\":216,\"OutputName\":\"360平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":4},{\"PSCode\":120110000287,\"OutputCode\":216,\"OutputName\":\"360平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":4},{\"PSCode\":120110000287,\"OutputCode\":216,\"OutputName\":\"360平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":4},{\"PSCode\":120110000287,\"OutputCode\":216,\"OutputName\":\"360平米烧结机脱硫除尘出口\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":4},{\"PSCode\":120110000287,\"OutputCode\":224,\"OutputName\":\"265平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":5},{\"PSCode\":120110000287,\"OutputCode\":224,\"OutputName\":\"265平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":5},{\"PSCode\":120110000287,\"OutputCode\":224,\"OutputName\":\"265平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":5},{\"PSCode\":120110000287,\"OutputCode\":224,\"OutputName\":\"265平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":5},{\"PSCode\":120110000287,\"OutputCode\":224,\"OutputName\":\"265平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":5},{\"PSCode\":120110000287,\"OutputCode\":224,\"OutputName\":\"265平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":5},{\"PSCode\":120110000287,\"OutputCode\":224,\"OutputName\":\"265平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":5},{\"PSCode\":120110000287,\"OutputCode\":224,\"OutputName\":\"265平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":5},{\"PSCode\":120110000287,\"OutputCode\":224,\"OutputName\":\"265平米烧结机脱硫除尘进口\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":5},{\"PSCode\":120110000287,\"OutputCode\":227,\"OutputName\":\"天钢废水排放口\",\"OutputType\":1,\"PollutantCode\":\"011\",\"PollutantName\":\"COD\",\"StandardAndDate\":\"标准:200\",\"Units\":\"mg/l\",\"IsHasZS\":1,\"OutputGroup\":6},{\"PSCode\":120110000287,\"OutputCode\":227,\"OutputName\":\"天钢废水排放口\",\"OutputType\":1,\"PollutantCode\":\"060\",\"PollutantName\":\"氨氮\",\"StandardAndDate\":\"5月1日至9月1日标准:15;9月2日至次年4月30日标准:15\",\"Units\":\"mg/l\",\"IsHasZS\":1,\"OutputGroup\":6},{\"PSCode\":120110000287,\"OutputCode\":227,\"OutputName\":\"天钢废水排放口\",\"OutputType\":1,\"PollutantCode\":\"001\",\"PollutantName\":\"PH值\",\"StandardAndDate\":\"标准:6-9\",\"Units\":\"\",\"IsHasZS\":1,\"OutputGroup\":6},{\"PSCode\":120110000287,\"OutputCode\":227,\"OutputName\":\"天钢废水排放口\",\"OutputType\":1,\"PollutantCode\":\"B01\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"l\",\"IsHasZS\":1,\"OutputGroup\":6},{\"PSCode\":120110000287,\"OutputCode\":233,\"OutputName\":\"265平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"001\",\"PollutantName\":\"烟尘\",\"StandardAndDate\":\"标准:20\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":7},{\"PSCode\":120110000287,\"OutputCode\":233,\"OutputName\":\"265平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":7},{\"PSCode\":120110000287,\"OutputCode\":233,\"OutputName\":\"265平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":7},{\"PSCode\":120110000287,\"OutputCode\":233,\"OutputName\":\"265平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":7},{\"PSCode\":120110000287,\"OutputCode\":233,\"OutputName\":\"265平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":7},{\"PSCode\":120110000287,\"OutputCode\":233,\"OutputName\":\"265平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":7},{\"PSCode\":120110000287,\"OutputCode\":233,\"OutputName\":\"265平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":7},{\"PSCode\":120110000287,\"OutputCode\":233,\"OutputName\":\"265平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":7},{\"PSCode\":120110000287,\"OutputCode\":233,\"OutputName\":\"265平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":7},{\"PSCode\":120110000287,\"OutputCode\":233,\"OutputName\":\"265平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":7},{\"PSCode\":120110000287,\"OutputCode\":236,\"OutputName\":\"360平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"001\",\"PollutantName\":\"烟尘\",\"StandardAndDate\":\"标准:20\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":8},{\"PSCode\":120110000287,\"OutputCode\":236,\"OutputName\":\"360平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":8},{\"PSCode\":120110000287,\"OutputCode\":236,\"OutputName\":\"360平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":8},{\"PSCode\":120110000287,\"OutputCode\":236,\"OutputName\":\"360平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":8},{\"PSCode\":120110000287,\"OutputCode\":236,\"OutputName\":\"360平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":8},{\"PSCode\":120110000287,\"OutputCode\":236,\"OutputName\":\"360平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":8},{\"PSCode\":120110000287,\"OutputCode\":236,\"OutputName\":\"360平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":8},{\"PSCode\":120110000287,\"OutputCode\":236,\"OutputName\":\"360平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":8},{\"PSCode\":120110000287,\"OutputCode\":236,\"OutputName\":\"360平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":8},{\"PSCode\":120110000287,\"OutputCode\":236,\"OutputName\":\"360平米烧结机机尾\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":8},{\"PSCode\":120110000287,\"OutputCode\":239,\"OutputName\":\"2000立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"001\",\"PollutantName\":\"烟尘\",\"StandardAndDate\":\"标准:15\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":9},{\"PSCode\":120110000287,\"OutputCode\":239,\"OutputName\":\"2000立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":9},{\"PSCode\":120110000287,\"OutputCode\":239,\"OutputName\":\"2000立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":9},{\"PSCode\":120110000287,\"OutputCode\":239,\"OutputName\":\"2000立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":9},{\"PSCode\":120110000287,\"OutputCode\":239,\"OutputName\":\"2000立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":9},{\"PSCode\":120110000287,\"OutputCode\":239,\"OutputName\":\"2000立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":9},{\"PSCode\":120110000287,\"OutputCode\":239,\"OutputName\":\"2000立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":9},{\"PSCode\":120110000287,\"OutputCode\":239,\"OutputName\":\"2000立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":9},{\"PSCode\":120110000287,\"OutputCode\":239,\"OutputName\":\"2000立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":9},{\"PSCode\":120110000287,\"OutputCode\":239,\"OutputName\":\"2000立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":9},{\"PSCode\":120110000287,\"OutputCode\":241,\"OutputName\":\"3200立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"001\",\"PollutantName\":\"烟尘\",\"StandardAndDate\":\"标准:15\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":10},{\"PSCode\":120110000287,\"OutputCode\":241,\"OutputName\":\"3200立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":10},{\"PSCode\":120110000287,\"OutputCode\":241,\"OutputName\":\"3200立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":10},{\"PSCode\":120110000287,\"OutputCode\":241,\"OutputName\":\"3200立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":10},{\"PSCode\":120110000287,\"OutputCode\":241,\"OutputName\":\"3200立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":10},{\"PSCode\":120110000287,\"OutputCode\":241,\"OutputName\":\"3200立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":10},{\"PSCode\":120110000287,\"OutputCode\":241,\"OutputName\":\"3200立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":10},{\"PSCode\":120110000287,\"OutputCode\":241,\"OutputName\":\"3200立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":10},{\"PSCode\":120110000287,\"OutputCode\":241,\"OutputName\":\"3200立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":10},{\"PSCode\":120110000287,\"OutputCode\":241,\"OutputName\":\"3200立方米高炉出铁场\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":10},{\"PSCode\":120110000287,\"OutputCode\":244,\"OutputName\":\"2000立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"001\",\"PollutantName\":\"烟尘\",\"StandardAndDate\":\"标准:10\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":11},{\"PSCode\":120110000287,\"OutputCode\":244,\"OutputName\":\"2000立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":11},{\"PSCode\":120110000287,\"OutputCode\":244,\"OutputName\":\"2000立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":11},{\"PSCode\":120110000287,\"OutputCode\":244,\"OutputName\":\"2000立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":11},{\"PSCode\":120110000287,\"OutputCode\":244,\"OutputName\":\"2000立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":11},{\"PSCode\":120110000287,\"OutputCode\":244,\"OutputName\":\"2000立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":11},{\"PSCode\":120110000287,\"OutputCode\":244,\"OutputName\":\"2000立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":11},{\"PSCode\":120110000287,\"OutputCode\":244,\"OutputName\":\"2000立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":11},{\"PSCode\":120110000287,\"OutputCode\":244,\"OutputName\":\"2000立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":11},{\"PSCode\":120110000287,\"OutputCode\":244,\"OutputName\":\"2000立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":11},{\"PSCode\":120110000287,\"OutputCode\":247,\"OutputName\":\"3200立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"001\",\"PollutantName\":\"烟尘\",\"StandardAndDate\":\"标准:10\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":12},{\"PSCode\":120110000287,\"OutputCode\":247,\"OutputName\":\"3200立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":12},{\"PSCode\":120110000287,\"OutputCode\":247,\"OutputName\":\"3200立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":12},{\"PSCode\":120110000287,\"OutputCode\":247,\"OutputName\":\"3200立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":12},{\"PSCode\":120110000287,\"OutputCode\":247,\"OutputName\":\"3200立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":12},{\"PSCode\":120110000287,\"OutputCode\":247,\"OutputName\":\"3200立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":12},{\"PSCode\":120110000287,\"OutputCode\":247,\"OutputName\":\"3200立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":12},{\"PSCode\":120110000287,\"OutputCode\":247,\"OutputName\":\"3200立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":12},{\"PSCode\":120110000287,\"OutputCode\":247,\"OutputName\":\"3200立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":12},{\"PSCode\":120110000287,\"OutputCode\":247,\"OutputName\":\"3200立方米高炉矿槽\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":12},{\"PSCode\":120110000287,\"OutputCode\":251,\"OutputName\":\"炼钢1号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"001\",\"PollutantName\":\"烟尘\",\"StandardAndDate\":\"标准:15\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":13},{\"PSCode\":120110000287,\"OutputCode\":251,\"OutputName\":\"炼钢1号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":13},{\"PSCode\":120110000287,\"OutputCode\":251,\"OutputName\":\"炼钢1号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":13},{\"PSCode\":120110000287,\"OutputCode\":251,\"OutputName\":\"炼钢1号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":13},{\"PSCode\":120110000287,\"OutputCode\":251,\"OutputName\":\"炼钢1号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":13},{\"PSCode\":120110000287,\"OutputCode\":251,\"OutputName\":\"炼钢1号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":13},{\"PSCode\":120110000287,\"OutputCode\":251,\"OutputName\":\"炼钢1号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":13},{\"PSCode\":120110000287,\"OutputCode\":251,\"OutputName\":\"炼钢1号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":13},{\"PSCode\":120110000287,\"OutputCode\":251,\"OutputName\":\"炼钢1号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":13},{\"PSCode\":120110000287,\"OutputCode\":251,\"OutputName\":\"炼钢1号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":13},{\"PSCode\":120110000287,\"OutputCode\":253,\"OutputName\":\"炼钢2号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"001\",\"PollutantName\":\"烟尘\",\"StandardAndDate\":\"标准:15\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":14},{\"PSCode\":120110000287,\"OutputCode\":253,\"OutputName\":\"炼钢2号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":14},{\"PSCode\":120110000287,\"OutputCode\":253,\"OutputName\":\"炼钢2号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":14},{\"PSCode\":120110000287,\"OutputCode\":253,\"OutputName\":\"炼钢2号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":14},{\"PSCode\":120110000287,\"OutputCode\":253,\"OutputName\":\"炼钢2号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":14},{\"PSCode\":120110000287,\"OutputCode\":253,\"OutputName\":\"炼钢2号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":14},{\"PSCode\":120110000287,\"OutputCode\":253,\"OutputName\":\"炼钢2号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":14},{\"PSCode\":120110000287,\"OutputCode\":253,\"OutputName\":\"炼钢2号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":14},{\"PSCode\":120110000287,\"OutputCode\":253,\"OutputName\":\"炼钢2号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":14},{\"PSCode\":120110000287,\"OutputCode\":253,\"OutputName\":\"炼钢2号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":14},{\"PSCode\":120110000287,\"OutputCode\":254,\"OutputName\":\"炼钢3号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"001\",\"PollutantName\":\"烟尘\",\"StandardAndDate\":\"标准:15\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":15},{\"PSCode\":120110000287,\"OutputCode\":254,\"OutputName\":\"炼钢3号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":15},{\"PSCode\":120110000287,\"OutputCode\":254,\"OutputName\":\"炼钢3号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":15},{\"PSCode\":120110000287,\"OutputCode\":254,\"OutputName\":\"炼钢3号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":15},{\"PSCode\":120110000287,\"OutputCode\":254,\"OutputName\":\"炼钢3号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":15},{\"PSCode\":120110000287,\"OutputCode\":254,\"OutputName\":\"炼钢3号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":15},{\"PSCode\":120110000287,\"OutputCode\":254,\"OutputName\":\"炼钢3号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":15},{\"PSCode\":120110000287,\"OutputCode\":254,\"OutputName\":\"炼钢3号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":15},{\"PSCode\":120110000287,\"OutputCode\":254,\"OutputName\":\"炼钢3号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":15},{\"PSCode\":120110000287,\"OutputCode\":254,\"OutputName\":\"炼钢3号二次除尘\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":15},{\"PSCode\":120110000287,\"OutputCode\":260,\"OutputName\":\"天钢热力锅炉\",\"OutputType\":2,\"PollutantCode\":\"002\",\"PollutantName\":\"二氧化硫\",\"StandardAndDate\":\"标准:35\",\"Units\":\"mg/m3\",\"IsHasZS\":0,\"OutputGroup\":16},{\"PSCode\":120110000287,\"OutputCode\":260,\"OutputName\":\"天钢热力锅炉\",\"OutputType\":2,\"PollutantCode\":\"003\",\"PollutantName\":\"氮氧化物\",\"StandardAndDate\":\"标准:100\",\"Units\":\"mg/m3\",\"IsHasZS\":0,\"OutputGroup\":16},{\"PSCode\":120110000287,\"OutputCode\":260,\"OutputName\":\"天钢热力锅炉\",\"OutputType\":2,\"PollutantCode\":\"001\",\"PollutantName\":\"烟尘\",\"StandardAndDate\":\"标准:5\",\"Units\":\"mg/m3\",\"IsHasZS\":0,\"OutputGroup\":16},{\"PSCode\":120110000287,\"OutputCode\":260,\"OutputName\":\"天钢热力锅炉\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":16},{\"PSCode\":120110000287,\"OutputCode\":260,\"OutputName\":\"天钢热力锅炉\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":16},{\"PSCode\":120110000287,\"OutputCode\":260,\"OutputName\":\"天钢热力锅炉\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":16},{\"PSCode\":120110000287,\"OutputCode\":260,\"OutputName\":\"天钢热力锅炉\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":16},{\"PSCode\":120110000287,\"OutputCode\":260,\"OutputName\":\"天钢热力锅炉\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":16},{\"PSCode\":120110000287,\"OutputCode\":260,\"OutputName\":\"天钢热力锅炉\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":16},{\"PSCode\":120110000287,\"OutputCode\":260,\"OutputName\":\"天钢热力锅炉\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":16},{\"PSCode\":120110000287,\"OutputCode\":260,\"OutputName\":\"天钢热力锅炉\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":16},{\"PSCode\":120110000287,\"OutputCode\":260,\"OutputName\":\"天钢热力锅炉\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":16},{\"PSCode\":120110000287,\"OutputCode\":262,\"OutputName\":\"高炉热风炉1号\",\"OutputType\":2,\"PollutantCode\":\"003\",\"PollutantName\":\"氮氧化物\",\"StandardAndDate\":\"标准:300\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":17},{\"PSCode\":120110000287,\"OutputCode\":262,\"OutputName\":\"高炉热风炉1号\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":17},{\"PSCode\":120110000287,\"OutputCode\":262,\"OutputName\":\"高炉热风炉1号\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":17},{\"PSCode\":120110000287,\"OutputCode\":262,\"OutputName\":\"高炉热风炉1号\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":17},{\"PSCode\":120110000287,\"OutputCode\":262,\"OutputName\":\"高炉热风炉1号\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":17},{\"PSCode\":120110000287,\"OutputCode\":262,\"OutputName\":\"高炉热风炉1号\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":17},{\"PSCode\":120110000287,\"OutputCode\":262,\"OutputName\":\"高炉热风炉1号\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":17},{\"PSCode\":120110000287,\"OutputCode\":262,\"OutputName\":\"高炉热风炉1号\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":17},{\"PSCode\":120110000287,\"OutputCode\":262,\"OutputName\":\"高炉热风炉1号\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":17},{\"PSCode\":120110000287,\"OutputCode\":262,\"OutputName\":\"高炉热风炉1号\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":17},{\"PSCode\":120110000287,\"OutputCode\":265,\"OutputName\":\"高炉热风炉2号\",\"OutputType\":2,\"PollutantCode\":\"003\",\"PollutantName\":\"氮氧化物\",\"StandardAndDate\":\"标准:300\",\"Units\":\"mg/m3\",\"IsHasZS\":1,\"OutputGroup\":18},{\"PSCode\":120110000287,\"OutputCode\":265,\"OutputName\":\"高炉热风炉2号\",\"OutputType\":2,\"PollutantCode\":\"B02\",\"PollutantName\":\"流量\",\"StandardAndDate\":\"\",\"Units\":\"m3\",\"IsHasZS\":1,\"OutputGroup\":18},{\"PSCode\":120110000287,\"OutputCode\":265,\"OutputName\":\"高炉热风炉2号\",\"OutputType\":2,\"PollutantCode\":\"S01\",\"PollutantName\":\"氧含量\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":18},{\"PSCode\":120110000287,\"OutputCode\":265,\"OutputName\":\"高炉热风炉2号\",\"OutputType\":2,\"PollutantCode\":\"S02\",\"PollutantName\":\"烟气流速\",\"StandardAndDate\":\"\",\"Units\":\"m/s\",\"IsHasZS\":1,\"OutputGroup\":18},{\"PSCode\":120110000287,\"OutputCode\":265,\"OutputName\":\"高炉热风炉2号\",\"OutputType\":2,\"PollutantCode\":\"S03\",\"PollutantName\":\"烟气温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":18},{\"PSCode\":120110000287,\"OutputCode\":265,\"OutputName\":\"高炉热风炉2号\",\"OutputType\":2,\"PollutantCode\":\"S04\",\"PollutantName\":\"烟气动压\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":18},{\"PSCode\":120110000287,\"OutputCode\":265,\"OutputName\":\"高炉热风炉2号\",\"OutputType\":2,\"PollutantCode\":\"S05\",\"PollutantName\":\"烟气湿度\",\"StandardAndDate\":\"\",\"Units\":\"%\",\"IsHasZS\":1,\"OutputGroup\":18},{\"PSCode\":120110000287,\"OutputCode\":265,\"OutputName\":\"高炉热风炉2号\",\"OutputType\":2,\"PollutantCode\":\"S06\",\"PollutantName\":\"制冷温度\",\"StandardAndDate\":\"\",\"Units\":\"℃\",\"IsHasZS\":1,\"OutputGroup\":18},{\"PSCode\":120110000287,\"OutputCode\":265,\"OutputName\":\"高炉热风炉2号\",\"OutputType\":2,\"PollutantCode\":\"S07\",\"PollutantName\":\"烟道截面积\",\"StandardAndDate\":\"\",\"Units\":\"㎡\",\"IsHasZS\":1,\"OutputGroup\":18},{\"PSCode\":120110000287,\"OutputCode\":265,\"OutputName\":\"高炉热风炉2号\",\"OutputType\":2,\"PollutantCode\":\"S08\",\"PollutantName\":\"烟气压力\",\"StandardAndDate\":\"\",\"Units\":\"KPa\",\"IsHasZS\":1,\"OutputGroup\":18}]";
+            if (typeof data != 'object') {
+                data = JSON.parse(data);
+            }
+            var htmlStrTotal = '';
+            var htmlStr = '';
+
+            //初始化监测因子查询条件
+            $.each(data, function (i, row) {
+                var OutputName = row.OutputName_ ? row.OutputName_ : row.OutputName;
+                var PollutantName = row.PollutantName;
+                var Units = row.Units;
+                var PollutantCode = row.PollutantCode;
+                var IsHasZS = row.OutputName_ ? (row.IsHasZS == '1' ? '0' : '1') : row.IsHasZS;//row.OutputName_则为4.0系统，对值进行反转下，保持以前对值的错误取值
+                var OutputType = row.OutputType;
+                var StandardAndDate = row.StandardAndDate;
+                var Units = row.Units;
+                // console.log(row.PollutantCode)
+                var listStr = OutputName + '-' + PollutantName + Units;
+                htmlStr = template1ist.replace('{listStr}', listStr);
+                htmlStr = htmlStr.replace('{OutputCode}', row.OutputCode);
+                htmlStr = htmlStr.replace('{PollutantCode}', row.PollutantCode);
+                htmlStr = htmlStr.replace('{OutputType}', row.OutputType);
+                htmlStr = htmlStr.replace('{IsHasZS}', IsHasZS);
+                htmlStr = htmlStr.replace('{PollutantName}', row.PollutantName);
+                htmlStr = htmlStr.replace('{StandardAndDate}', row.StandardAndDate);
+                htmlStr = htmlStr.replace('{Units}', row.Units);
+                htmlStrTotal += htmlStr;
+                list.push(row);
+            })
+            $(".cnla").html(htmlStrTotal);
+
+
+            //重置页面内容，需重新初始化事件
+            initEvent();
+            //设置第一个的排口的默认值
+
+
+            $('.cnla tr')[0].click();
+            //databind();
+            //}
+            //})
+        }
+
+
+        //监测因子点击事件调用
+        function menuList(PollutantCode, OutputType, IsHasZS, OutputCode, PollutantName, StandardAndDate, Units) {
+            //$(".table").html(templateTable);
+            if (IsHasZS == "0" && OutputType == 2) {
+                param.column.zhesuanzhi = true;
+            } else {
+                param.column.zhesuanzhi = false;
+            }
+            if (PollutantCode.substr(0, 1) == "S" || PollutantCode.substr(0, 1) == "B") {
+                param.column.biaozhun = false;
+                param.column.menxian = false;
+
+            } else if (PollutantCode == "001" && OutputType == "1") {
+                param.column.biaozhun = true;
+                param.column.menxian = true;
+            } else {
+                param.column.biaozhun = true;
+                param.column.menxian = true;
+            }
+
+            param.PollutantCode = PollutantCode;
+            param.OutputType = OutputType;
+            param.OutputCode = OutputCode;
+            param.PollutantName = PollutantName;
+            param.StandardAndDate = StandardAndDate;
+            param.Units = Units;
+
+
+
+
+            //更新数据
+            $('.xun').click();
+
+
+            // if(PollutantName=="氧含量"){
+            //     $(".qi").html("监测数据(%)")
+            // }
+
+
+
+        }
+
+
+        //格式化表头
+        function initThead() {
+
+            if (param.column.jianceTime) {
+                $('.jianceTime').css({
+                    'display': ''
+                })
+            } else {
+                $('.jianceTime').css({
+                    'display': 'none'
+                })
+            }
+
+            if (param.column.biaozhun) {
+                $('.biaozhun').css({
+                    'display': ''
+                })
+            } else {
+
+                $('.biaozhun').css({
+                    'display': 'none'
+                })
+            }
+            if (param.column.menxian) {
+                $('.menxian').css({
+                    'display': ''
+                })
+            } else {
+
+                $('.menxian').css({
+                    'display': 'none'
+                })
+            }
+            if (param.column.jiancezhi) {
+                $('.jiancezhi').css({
+                    'display': ''
+                })
+            } else {
+
+                $('.jiancezhi').css({
+                    'display': 'none'
+                })
+            }
+            if (param.column.zhesuanzhi) {
+                $('.zhesuanzhi').css({
+                    'display': ''
+                })
+            } else {
+                $('.zhesuanzhi').css({
+                    'display': 'none'
+                })
+            }
+
+
+        }
+
+        //旋转屏
+        function changeSceneUpright(wrap, deg) {
+            if (deg != 0) {
+                deg = 90;
+            }
+            var iniW = 1000,
+                iniH = 640,
+                tarW = 0,
+                tarH = 0;
+            var ww = window.innerWidth;
+            var wh = window.innerHeight;
+
+
+            if (!isupright()) {		//如果浏览器的宽度大于高度，说明是横屏的，画布的宽度 == 浏览器的宽度
+                console.log('浏览器的宽度大于高度');
+                wrap.css({
+                    'width': ww + 'px',
+                    'height': wh + 'px',
+                    'transform': 'translate3d(-50%,-50%,' + deg + ')',
+                    '-webkit-transform': 'translate3d(-50%,-50%,0)'
+                });
+
+
+            } else {	//如果浏览器的宽度小于高度，说明是竖的，画布的宽度 == 浏览器的高度
+                console.log('浏览器的宽度小于高度');
+                tarW = wh;
+                tarH = tarW * iniH / iniW;
+                if (deg != 0) {
+                    wrap.css({
+                        'width': wh + 'px',
+                        'height': ww + 'px',
+                        'transform': 'translate3d(0%,0%,0) rotate(' + deg + 'deg)',
+                        '-webkit-transform': 'translate3d(-50%,-50%,0) rotate(' + deg + 'deg)'
+                    });
+                } else {
+                    wrap.css({
+                        'transform': 'translate3d(0%,0%,0) rotate(' + deg + 'deg)',
+                        '-webkit-transform': 'translate3d(0%,0%,0) rotate(' + deg + 'deg)'
+                    });
+                }
+            }
+        }
+
+        //横屏调用
+        function changeScene() {
+            var wrap = $('.bigbox');
+            ww = window.innerWidth;
+            wh = window.innerHeight;
+
+
+            if (ww > wh) {		//如果浏览器的宽度大于高度，说明是横屏的，画布的宽度 == 浏览器的宽度
+                console.log('浏览器的宽度大于高度');
+                wrap.css({
+                    'width': ww + 'px',
+                    'height': wh + 'px',
+                    'transform': 'translate3d(-50%,-50%,0)',
+                    '-webkit-transform': 'translate3d(-50%,-50%,0)'
+                });
+
+
+            } else if (ww <= wh) {	//如果浏览器的宽度小于高度，说明是竖的，画布的宽度 == 浏览器的高度
+                console.log('浏览器的宽度小于高度');
+                wrap.css({
+                    'width': wh + 'px',
+                    'height': ww + 'px',
+                    'transform': 'translate3d(-50%,-50%,0) rotate(90deg)',
+                    '-webkit-transform': 'translate3d(-50%,-50%,0) rotate(90deg)'
+                });
+            }
+
+        }
+
+
+        //是否为竖屏
+        function isupright() {
+            var ww = window.innerWidth;
+            var wh = window.innerHeight;
+            if (ww > wh) {		//如果浏览器的宽度大于高度，说明是横屏的，画布的宽度 == 浏览器的宽度
+                return false;
+
+            } else if (ww <= wh) {	//如果浏览器的宽度小于高度，说明是竖的，画布的宽度 == 浏览器的高度
+                return true;
+            }
+        }
+
+
+
+        //初始化折线
+        function refreshLine() {
+            $(".cnup").hide()
+            $('.big').show();
+            addMask();
+            var queryParam = getQueryParam();
+            $.ajax({
+                url: url3,
+                method: 'get',
+                dataType: 'json',
+                data: queryParam,
+                success: function (data) {
+                    cancelMask();
+                    if (typeof data != 'object') {
+                        data = JSON.parse(data);
+                    }
+
+                    //折线顶部提示框信息初始化
+                    var upStandard = '';
+                    var upperValue = '';
+                    if (param.isDisplayLowerStandard == 1) {
+                        if (data.lowerStandard[0] == null) {
+                            upStandard = '标准:' + data.upStandard[0];
+                        } else {
+                            upStandard = '标准:' + data.lowerStandard[0] + '-' + data.upStandard[0];
+                        }
+
+                        if (data.lowerValue[0] == null) {
+                            upperValue = '报警门限:' + data.upperValue[0];
+                        } else {
+                            upperValue = '报警门限:' + data.lowerValue[0] + '-' + data.upperValue[0];
+                        }
+                    } else {
+                        upStandard = '标准:' + data.upStandard[0];
+                        upperValue = '报警门限:' + data.upperValue[0];
+                    }
+
+                    if (param.OutputType == "1" && param.PollutantName == "氨氮") {
+                        // console.log(1)
+
+                        $(".cnup").show();
+                        upStandard = "标准:";
+                        // $('#upStandard').html("3月15日至11月15日标准;11月16日至次年3月14日标准:8");
+                    }
+
+                    //标准
+                    $('#upStandard').html(upStandard);
+                    //报警门限
+                    $('#upperValue').text(upperValue);
+                    refreshTitle();
+                    //格式化位置
+                    var xylocation = {};
+                    var tooltip = {};
+                    if (isupright()) {
+                        xylocation = {
+                            x: 40,
+                            x2: 40,
+                            y: 25,
+                            height: 180
+                        }
+                    } else {
+                        xylocation = {
+                            x: 40,
+                            x2: 40,
+                            y: 25,
+                            height: 130
+                        }
+                        tooltip = {
+                            trigger: 'axis',
+                            position: function (p) {   //其中p为当前鼠标的位置
+                                return [p[0] - 18, p[1] - 40];
+                            },
+                            formatter: '{c}'
+                        }
+                    }
+                    if (queryParam.PollutantCode == "S01") {
+                        data.upStandard = [];
+                    }
+
+                    //    氨氮内容
+                    var edg = param.StandardAndDate;
+
+                    var im = param.PollutantName;
+                    if (im == "氨氮") {
+
+                        if (edg.indexOf(";") > 0) {
+                            // alert("包含分号")
+                            var arr = edg.split(";");
+                            //上面
+                            var sup = arr[0];
+                            var qxia = arr[1];
+
+
+
+                            //标准5
+                            var wu = arr[0].split(":");
+                            //年月日
+                            var wu2 = wu[0].replace("标准", "");
+
+                            //标准值
+                            var wu1 = wu[1]
+
+                            // console.log(wu1)
+
+                            //标准8
+                            var w = qxia.split(":");
+
+                            //年月日
+                            var w1 = w[0].replace("标准", "");
+
+                            //标准值
+                            var w2 = w[1]
+                            var wuup = wu1 + '(' + wu2 + ')';
+
+                            $(".wuup").html(wuup);
+                            var xia = w2 + '(' + w1 + ')';
+                            $(".xia").html(xia);
+
+
+                        } else {
+                            // alert("不包含分号")
+                            // var biaozhun1=edg.split(":");
+                            // console.log(biaozhun1)
+                            // var biaozhun2=biaozhun1[0].replace("标准","");
+                            // var biaozhun3= biaozhun1[1]+'('+biaozhun2+')';
+                            // console.log(biaozhun3)
+                            $("#upStandard").html(edg);
+                        }
+
+
+
+                        // console.log(arr[0],arr[1]);
+
+
+                        // console.log(w1)
+
+
+                    }
+
+
+
+
+                    var myChart = echarts.init(document.getElementById("main"));
+                    var option = {
+                        tooltip: tooltip,
+                        toolbox: {
+                            show: true,
+
+                        },
+                        calculable: true,
+                        grid: xylocation,
+                        xAxis: [
+                            {
+                                axisLine: {
+                                    lineStyle: {
+                                        color: '#ccc',
+                                        width: 1,//这里是为了突出显示加上的，可以去掉
+                                    }
+                                },
+                                //                axisLabel:{
+                                //                  margin:'1',
+                                //                },
+                                axisTick: {
+                                    show: false
+                                },
+                                type: 'category',
+                                boundaryGap: false,
+                                data: data.xAxis
+                            }
+                        ],
+
+                        yAxis: [
+
+                            {
+                                axisLine: {
+                                    lineStyle: {
+                                        color: '#ccc',
+                                    }
+                                },
+                                type: 'value',
+                            }
+                        ],
+                        series: [
+                            {
+                                name: '监测数据',
+                                type: 'line',
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            show: isupright() ? true : false
+                                        },
+                                        color: '#4C9CFB',
+                                        lineStyle: {
+                                            color: '#4C9CFB'
+                                        }
+                                    }
+                                },
+                                data: param.column.zhesuanzhi ? data.zSMonitValue : data.yData
+                            },
+                            {
+                                name: '标准值',
+                                type: 'line',
+                                showSymbol: false,
+                                tooltip: {
+                                    show: false
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            show: false
+                                        },
+                                        color: '#FF7575',
+                                        lineStyle: {
+                                            color: '#FF7575'
+                                        }
+                                    }
+                                },
+                                data: data.upStandard
+                            },
+                            {
+                                name: '标准值',
+                                type: 'line',
+                                showSymbol: false,
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            show: true
+                                        },
+                                        color: '#FF7575',
+                                        lineStyle: {
+                                            color: '#FF7575'
+                                        }
+                                    }
+                                },
+                                data: param.isDisplayLowerStandard == 1 ? data.lowerStandard : []//只有在监测因子为PH时才显示
+                            }
+                        ],
+                    };
+
+                    // 为echarts对象加载数据
+                    myChart.setOption(option);
+
+                }
+            })
+        }
+
+        //查询条件
+        function getQueryParam() {
+            var queryParam = {};
+            queryParam.PollutantCode = param.PollutantCode;
+            queryParam.PollutantName = param.PollutantName;
+            queryParam.OutputType = param.OutputType;
+            queryParam.OutputCode = param.OutputCode;
+            queryParam.dataType = param.dataType;
+            queryParam.monitorDate = param.monitorDate;
+            queryParam.StandardAndDate = param.StandardAndDate;
+            queryParam.Units = param.Units;
+            queryParam.pageNo = param.pageNo;
+            queryParam.pageSize = param.pageSize;
+            return queryParam;
+        }
+
+        //初始化事件
+        function initEvent() {
+            $('#pageDiv').hide();
+            $(".cndown li").each(function (index, demo) {
+                $(demo).off('click').on("click", function () {
+
+                    var nowStr = $(demo).html();
+                    $(".qwe").html(nowStr)
+                    param.dataType = $(demo).data('options');
+                    stt1 = $(demo).data('options');
+                    param.monitorType = stt1;
+                    if (stt1 == 0 || stt1 == 2 || stt1 == 3) {
+                        $("#rili").css({ "display": "block" })
+                        $("#rili1").css({ "display": "none" })
+                    } else if (stt1 == 1) {
+                        $("#rili").css({ "display": "none" })
+                        $("#rili1").css({ "display": "block" })
+                    }
+
+                    if (stt1 != 0 && stt1 != 1) {
+                        $('#pageDiv').show();
+                    } else {
+                        $('#pageDiv').hide();
+                    }
+                    initPage();
+                    $('.xun').click();
+
+                })
+            })
+
+            //初始化表格提示信息
+            $(".cnla tr").each(function (index, demo) {
+                $(demo).off('click').on("click", function () {
+
+                    var xiaStr = $(demo).html();
+                    var td = xiaStr.replace("<td>", "")
+                    var td1 = td.replace("</td>", "")
+                    $("#bleft1").val(td1);
+                    // console.log(td1)
+
+                    $(".cnxia").hide()
+
+                    // var nowStr = $(demo).html();
+                    // $(".bleft").html(nowStr)
+                    //td1当前下拉菜单选择的值
+                    if (param.currentPage == 0) {
+
+                        // if (td1.indexOf("氧含量") >= 0 || td1.indexOf("流量") >= 0) {
+
+                        // $(".small").css({"display": "flex"})
+                        // $(".big").css({"display": "none"})
+                        // } else if (td1.indexOf("PH") >= 0 || td1.indexOf("氨氮") >= 0 || td1.indexOf("COD") >= 0) {
+                        // $(".small").css({"display": "none"});
+                        // $(".big").css({"display": "flex"});
+
+                        // } else {
+                        // $(".small").css({"display": "none"})
+                        // $(".big").css({"display": "flex"})
+                        // }
+                    }
+
+                    //0:监测因子不为PH，1：监测因子为PH
+                    if (td1.indexOf("PH") >= 0) {
+                        param.isDisplayLowerStandard = 1;
+                    } else {
+                        param.isDisplayLowerStandard = 0;
+                    }
+
+                })
+            })
+
+            //查询点击事件
+            $('.xun').off('click').on('click', function () {
+
+                //初始化分页数据
+                param.pageNo = 1;
+                initPage();
+                if (param.currentPage == 0) {
+                    refreshLine();
+                } else {
+                    databind();
+                }
+            })
+
+
+            $(".zhe").on("click", function () {
+                $(".line").css({ "display": "block" });
+                $(".tabbox").css({ "display": "none" });
+                // $(".big").css("display", "flex");
+                // $(".zhe").css("marginLeft","2rem")
+
+            })
+
+
+            $(".cnbiao").on("click", function () {
+                $(".line").css({ "display": "none" });
+                $(".tabbox").css({ "display": "block" });
+                // $(".big").css("display", "none");
+                // $(".small").css("display", "none");
+                // $(".zhe").css("marginLeft","6rem");
+
+                // $(".table").css({"display":"block"});
+            })
+
+            //点击下拉菜单消失
+            var s1 = document.querySelector("#bleft");
+            var s2 = document.querySelector("#rili");
+            var s3 = document.querySelector(".xun");
+            var s4 = document.querySelector(".line");
+            s1.addEventListener("click", function () {
+
+                document.querySelector(".cnxia").style.display = "none";
+            })
+            s2.addEventListener("click", function () {
+
+                document.querySelector(".cnxia").style.display = "none";
+            })
+            s3.addEventListener("click", function () {
+
+                document.querySelector(".cnxia").style.display = "none";
+            })
+            s4.addEventListener("click", function () {
+
+                document.querySelector(".cnxia").style.display = "none";
+            })
+
+
+            //点击出现下拉菜单
+            $("#bleft1").on("click", function () {
+                $(".cnxia").show()
+
+
+            })
+
+            //上一页
+            $('#upPage').unbind('click').bind('click', function () {
+                if (param.pageNo != 1) {
+                    param.pageNo = param.pageNo - 1;
+                }
+
+                //dc8b2b
+                $('#upPage').css({
+                    color: '#2B8BDC'
+                });
+                setTimeout(function () {
+                    $('#upPage').css({
+                        color: '#CCCCCC'
+                    });
+                }, 500)
+                if (param.currentPage == 0) {
+                    refreshLine();
+                } else {
+                    refreshTable();
+                }
+            })
+
+
+            //下一页
+            $('#downPage').unbind('click').bind('click', function () {
+                //if(param.pageNo!=1){
+                param.pageNo = param.pageNo + 1;
+                //}
+                //dc8b2b
+                $('#downPage').css({
+                    color: '#2B8BDC'
+                });
+                setTimeout(function () {
+                    $('#downPage').css({
+                        color: '#CCCCCC'
+                    });
+                }, 500)
+                if (param.currentPage == 0) {
+                    refreshLine();
+                } else {
+                    refreshTable();
+                }
+            })
+
+        }
+
+        if (window.history && window.history.pushState) {
+            $(window).on('popstate', function () {
+                var hashLocation = location.hash; var hashSplit = hashLocation.split("#!/");
+                var hashName = hashSplit[1];
+                if (hashName !== '') { var hash = window.location.hash; if (hash === '') { window.location.href = index + "&random=" + Math.random(); } }
+            });
+            //window.history.pushState('forward', null, index+"&random="+Math.random());
+
+        }
+
+
+
+
+        /**
+         *
+         * 格式化折线图表头
+         */
+
+        function refreshTitle() {
+            var cnzhe = "折算数据";
+            var cnjian = "监测数据";
+
+            if (param.column.zhesuanzhi) {
+                $('.type1').css({ 'display': 'flex' });
+                $(".danwei").text(cnzhe + '(' + param.Units + ')');
+            } else {
+                $('.type1').css({ 'display': 'none' });
+            }
+            if (param.column.jiancezhi) {
+                //显示何种类型
+                var isdispaly = [false, false, false, false, false, false];
+                if (param.OutputType == 1) {
+                    // console.log("水")
+
+                    if (param.PollutantName == "流量") {
+                        //水流量
+                        $('.type2_2').css({ 'display': 'flex' });
+                        $(".danwei2").text(cnjian + '(' + param.Units + ')')
+                        isdispaly[1] = true;
+                    } else if (param.PollutantName.indexOf('PH') >= 0) {
+                        $('.type2_5').css({ 'display': 'flex' });
+                        $(".danwei5").text(cnjian)
+                        isdispaly[4] = true;
+                    }
+                    else {
+                        //废水
+                        $('.type2_3').css({ 'display': 'flex' });
+                        $(".danwei3").text(cnjian + '(' + param.Units + ')')
+                        isdispaly[2] = true;
+                    }
+                } else if (param.OutputType == 2) {
+                    // console.log("气")
+                    if (param.PollutantName == "流量") {
+                        //气流量
+                        $('.type2_4').css({ 'display': 'flex' });
+                        $(".danwei4").text(cnjian + '(' + param.Units + ')')
+                        isdispaly[3] = true;
+                    } else if (param.PollutantName == "氧含量" || param.PollutantName == "烟气流速" || param.PollutantName == "烟气温度" || param.PollutantName == "烟气动压" || param.PollutantName == "烟气湿度" || param.PollutantName == "制冷温度" || param.PollutantName == "烟道截面积" || param.PollutantName == "烟气压力") {
+                        //氧含量
+                        $('.type2_1').css({ 'display': 'flex' });
+                        $(".danwei1").text(cnjian + '(' + param.Units + ')')
+                        isdispaly[0] = true;
+                    } else if (!param.column.zhesuanzhi) {
+                        //监测数据
+                        $('.type2_6').css({ 'display': 'flex' });
+                        $(".danwei6").text(cnjian + '(' + param.Units + ')')
+                        isdispaly[5] = true;
+                    }
+                }
+
+                //隐藏不显示的
+                $.each(isdispaly, function (i, row) {
+                    if (!row) {
+                        $('.type2_' + (i + 1)).css({ 'display': 'none' });
+                    }
+                })
+            } else {
+                $('.type2_1').css({ 'display': 'none' });
+                $('.type2_2').css({ 'display': 'none' });
+                $('.type2_3').css({ 'display': 'none' });
+                $('.type2_4').css({ 'display': 'none' });
+                $('.type2_5').css({ 'display': 'none' });
+            }
+            if (param.column.biaozhun) {
+                $('.type3').css({ 'display': 'flex' });
+            } else {
+                $('.type3').css({ 'display': 'none' });
+            }
+            if (param.column.menxian) {
+                $('.type4').css({ 'display': 'flex' });
+            } else {
+                $('.type4').css({ 'display': 'none' });
+            }
+
+        }
+
+        /**
+         * 增加蒙版
+         */
+        function addMask() {
+            /*layer.open({
+                type: 2
+                ,content: '加载中...',
+                shadeClose: false,
+              });*/
+        }
+
+        /**
+         * 取消蒙版
+         */
+        function cancelMask() {
+            /*layer.closeAll();*/
+        }
+
+
+        /**
+         * 倒序-只对十分钟和实时数据进行初始化分页条件
+         */
+        function initPage() {
+            if (param.monitorType == 2 || param.monitorType == 3) {
+                //计算总页数
+                param.pageNo = 1;
+                /*var endDate = new Date();//结束时间  
+                var startDate= new Date(endDate.getFullYear()+"-"+(endDate.getMonth()+1)+"-"+endDate.getDate());  //开始时间  
+                var gapDatems = endDate.getTime() - startDate.getTime();   //时间差的毫秒数        
+                var gapMM = gapDatems/(60*1000);//时间差的分钟       
+                if(param.monitorType == 2){// 2：实时数据 
+                    param.pageNo = (gapMM-1)/param.pageSize;//实际数据向前提一个单位，考虑到数据延迟
+                }else if(param.monitorType == 3){//3：十分钟数据
+                    param.pageNo = (gapMM-10)/(param.pageSize*10);//实际数据向前提一个单位，考虑到数据延迟
+                }
+                if((param.pageNo-parseInt(param.pageNo))!=0){
+                    param.pageNo=parseInt(param.pageNo)+1;
+                }else{
+                    param.pageNo=parseInt(param.pageNo);
+                }*/
+
+            }
+
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
