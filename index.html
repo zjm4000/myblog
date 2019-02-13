@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -499,75 +499,6 @@
         param.pageSize = 10;
         param.monitorType = 1;//监测类型 0：小时数据 1：日数据 2：实时数据 3：十分钟数据
         var list = new Array();
-
-        //-----------------------------------横屏显示-------------------------------------
-
-        //初始化事件！重置页面内容，需重新初始化事件
-        initEvent();
-        initAll();
-        //初始化时间
-        initDate();
-        //初始化监测因子
-        refreshMonitorPoint();
-
-        window.onresize = function () {
-            //调整画布的位置和大小
-            // initAll();
-            $('div').hide();
-            window.location.href = onlineNew + "&random=" + Math.random();
-        }
-
-        //初始化布局
-        function initAll() {
-            if (isupright()) {
-                changeSceneUpright($('.bigbox'));
-                changeSceneUpright($('.line'), 0);
-                changeSceneUpright($('.tabbox'), 0);
-            } else {
-                changeScene();
-            }
-            $('.bigbox').css({ 'display': '' })
-        }
-
-        $(".tubiao").each(function (i, demo) {
-            $(demo).on("click", function () {
-                $(".zhe").removeClass("zhe");
-                $(".tubiao").each(function (j, ele) {
-                    $(ele).removeClass("bgb");
-                })
-                $(".cnfont").each(function (i, ele) {
-                    $(ele).removeClass("biaofont");
-                })
-                $(".cnfont").eq(i).addClass("biaofont");
-                $(demo).addClass("bgb");
-
-                if (i == 0) {
-                    param.currentPage = 0;
-                    $(".cnimg").eq(0).attr('src', "images/图表-选中.png");
-                    $(".cnimg").eq(1).attr('src', "images/表格-未选中.png");
-                } else if (i == 1) {
-                    param.currentPage = 1;
-                    $(".cnimg").eq(1).attr('src', "images/表格-选中.png");
-                    $(".cnimg").eq(0).attr('src', "images/图表-未选中.png");
-                }
-                $('.xun').click();
-            });
-
-            $(".tubiao").each(function (i, demo) {
-                $(demo).on("click", function () {
-                    $(".tubiao").each(function (j, ele) {
-                        $(ele).removeClass("bgb");
-                    });
-                    $(".cnfont").each(function (i, ele) {
-                        $(ele).removeClass("biaofont");
-                    });
-                    $(".cnfont").eq(i).addClass("biaofont");
-                    $(demo).addClass("bgb");
-
-                });
-            });
-        });
-
         var bleft1 = $("#bleft1 option:selected").text();
         //烟气总排口输入框的内容
         var stt;
@@ -593,6 +524,89 @@
 
             + '</tr>';
 
+        $(document).ready(function () {
+
+
+            //-----------------------------------横屏显示-------------------------------------
+
+            //初始化事件！重置页面内容，需重新初始化事件
+            initEvent();
+            initAll();
+            //初始化时间
+            initDate();
+            //初始化监测因子
+            refreshMonitorPoint();
+
+            window.onresize = function () {
+                //调整画布的位置和大小
+                // initAll();
+                $('div').hide();
+                window.location.href = onlineNew + "&random=" + Math.random();
+            }
+            if (window.history && window.history.pushState) {
+                $(window).on('popstate', function () {
+                    var hashLocation = location.hash; var hashSplit = hashLocation.split("#!/");
+                    var hashName = hashSplit[1];
+                    if (hashName !== '') { var hash = window.location.hash; if (hash === '') { window.location.href = index + "&random=" + Math.random(); } }
+                });
+                //window.history.pushState('forward', null, index+"&random="+Math.random());
+
+            }
+
+
+            $(".tubiao").each(function (i, demo) {
+                $(demo).on("click", function () {
+                    $(".zhe").removeClass("zhe");
+                    $(".tubiao").each(function (j, ele) {
+                        $(ele).removeClass("bgb");
+                    })
+                    $(".cnfont").each(function (i, ele) {
+                        $(ele).removeClass("biaofont");
+                    })
+                    $(".cnfont").eq(i).addClass("biaofont");
+                    $(demo).addClass("bgb");
+
+                    if (i == 0) {
+                        param.currentPage = 0;
+                        $(".cnimg").eq(0).attr('src', "images/图表-选中.png");
+                        $(".cnimg").eq(1).attr('src', "images/表格-未选中.png");
+                    } else if (i == 1) {
+                        param.currentPage = 1;
+                        $(".cnimg").eq(1).attr('src', "images/表格-选中.png");
+                        $(".cnimg").eq(0).attr('src', "images/图表-未选中.png");
+                    }
+                    $('.xun').click();
+                });
+
+                $(".tubiao").each(function (i, demo) {
+                    $(demo).on("click", function () {
+                        $(".tubiao").each(function (j, ele) {
+                            $(ele).removeClass("bgb");
+                        });
+                        $(".cnfont").each(function (i, ele) {
+                            $(ele).removeClass("biaofont");
+                        });
+                        $(".cnfont").eq(i).addClass("biaofont");
+                        $(demo).addClass("bgb");
+
+                    });
+                });
+            });
+
+
+        })
+
+        //初始化布局
+        function initAll() {
+            if (isupright()) {
+                changeSceneUpright($('.bigbox'));
+                changeSceneUpright($('.line'), 0);
+                changeSceneUpright($('.tabbox'), 0);
+            } else {
+                changeScene();
+            }
+            $('.bigbox').css({ 'display': '' })
+        }
 
         function databind() {
             $(".addtable").html("")
@@ -659,10 +673,10 @@
                             var biaozhun = row.UpStandard == null ? 0 : row.UpStandard;
                             var menxian = row.UpperValue == null ? 9999999 : row.UpperValue
                             str += '<td>' + time + '</td>';
-                            
-                            
 
-                            
+
+
+
                             var htmlStr = '';
                             if (value > biaozhun || value > menxian) {
                                 htmlStr += '<td style="color:blue">' + value + '</td>';
@@ -680,15 +694,15 @@
 
                         if (isvalue == 0) {
                             htmls.push(htmlStrTotal + '</tr>');
-                           
+
                         }
                     },
                     complete: function (XMLHttpRequest, textStatus) {
-                        if (strs.length>0) {
+                        if (strs.length > 0) {
                             $(".tabelhead").html(strs[0]);
                             strs.splice(0, 1);
                         }
-                        if (htmls.length>0) {
+                        if (htmls.length > 0) {
                             $(".addtable").append(htmls[0]);
                             findsameobj();
                             htmls.splice(0, 1);
@@ -1354,7 +1368,7 @@
                 if (param.currentPage == 0) {
                     refreshLine();
                 } else {
-                    //databind();
+                    databind();
                 }
             })
 
@@ -1454,15 +1468,7 @@
 
         }
 
-        if (window.history && window.history.pushState) {
-            $(window).on('popstate', function () {
-                var hashLocation = location.hash; var hashSplit = hashLocation.split("#!/");
-                var hashName = hashSplit[1];
-                if (hashName !== '') { var hash = window.location.hash; if (hash === '') { window.location.href = index + "&random=" + Math.random(); } }
-            });
-            //window.history.pushState('forward', null, index+"&random="+Math.random());
 
-        }
 
 
 
@@ -1594,7 +1600,6 @@
             }
 
         }
-
 
 
     </script>
